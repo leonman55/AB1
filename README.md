@@ -1,1 +1,1 @@
-# SoPra
+# Softwarepraktikum
