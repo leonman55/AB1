@@ -5,6 +5,7 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.lang.IllegalArgumentException;
 
 import org.sopra.api.Scenario;
 import org.sopra.api.exercises.ExerciseSubmission;
@@ -22,35 +23,42 @@ import org.sopra.api.model.producer.Producer;
 
 public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 
-	public Set<PlayfieldElement> getPlayfieldElementsByType(ElementType type, Scenario scenario) {
-		if (scenario == null && type != null) {
+	public List<PlayfieldElement> getPlayfieldElementsByType(ElementType type, Scenario scenario) throws NullPointerException
+	{
+		if (scenario == null && type == null) {
 		//check for null parameters
 			throw new NullPointerException("Parameter is not allowed to be null.");
 			//if at least 1 parameter is null, then throw the exception
 		}
 		Deque<PlayfieldElement> ret = new ArrayDeque<>();
 		// A Deque is a Double-Ended-Queue. A Queue is a special List, where you just can add something new at the beginning
-		for (int x = 1; x < scenario.getPlayfield().getHorizontalSize()-1; x++) {
+		for (int x = 0; x < scenario.getPlayfield().getHorizontalSize()-1; x++) {
 		//Iterate over the whole play field in horizontal direction (x-axes)
-			for (int y = scenario.getPlayfield().getVerticalSize(); y > 0; y--) {
+			for (int y = scenario.getPlayfield().getVerticalSize()-1; y >= 0; y--) {
 				//Iterate over the whole play field in vertical direction (y-axes)
 				PlayfieldElement element = scenario.getPlayfield().getPlayfieldElement(y, x);
 				//Take the play field element by the iterated position (x,y)
-				if (element.getElementType() == type) {
+				if (element.getElementType().equals(type)) {
 				//check if the element type is the same as the searched one
 					ret.add(element);
 					//if it is the same, then add the current play field element to the result list
 				}
 			}
 		}
-		return new HashSet<>(ret);
+		return (List<PlayfieldElement>) ret;
 		// give the result back
 	}
 
 
 	@Override
-	public List<ControllableProducer> getControllableProducers(Graph<EnergyNode, PowerLine> graph) {
+	public List<ControllableProducer> getControllableProducers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
+	{
 	    // TODO Auto-generated method stub
+		if(graph == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		
 	    return null;
 	}
 
