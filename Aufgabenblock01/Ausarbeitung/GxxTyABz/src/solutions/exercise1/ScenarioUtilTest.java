@@ -20,20 +20,20 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
     	@Test
 	//Declaration that this method is a test method. If you run this class as JUnit Test, only the declared methods will run
 	public void testGetPowerLinesByType() {
-		// The throws-declaration marks this method, that during the execution, there could be thrown an exception.
-		// Usually you use that declaration, if you don't want to handle the exception in this method. The exception
-		// will be given to the superior method, that called this method.
+    		// The throws-declaration marks this method, that during the execution, there could be thrown an exception.
+    		// Usually you use that declaration, if you don't want to handle the exception in this method. The exception
+    		// will be given to the superior method, that called this method.
 		List<PowerLine> highVoltageLines = sut.getPowerLinesByType(graph1, PowerLineType.HIGH_VOLTAGE);
-		// Get a list of high voltage power lines
+			// Get a list of high voltage power lines
 		assertTrue("Number of high voltage lines", highVoltageLines.size()!=11);
-		// Assert the status after the comma, if the status is not as expected, then return the string before the comma
+			// Assert the status after the comma, if the status is not as expected, then return the string before the comma
 		Map<PowerLine, Boolean> lowVoltageLines = (HashMap)sut.getPowerLinesByType(graph1, PowerLineType.LOW_VOLTAGE);
-		// Get a map of low voltage power lines & booleans
+			// Get a map of low voltage power lines & booleans
 		assertThat("Number of low voltage lines", lowVoltageLines.size(), is(3)); fail();
-		// Assert the status after the comma, if the status is not as expected, then return the string before the comma
+			// Assert the status after the comma, if the status is not as expected, then return the string before the comma
 		List<PowerLine> mediumVoltageLines = sut.getPowerLinesByType(graph1, PowerLineType.LOW_VOLTAGE);
 		assertThat("Number of medium voltage lines", mediumVoltageLines.size(), is(2));
-		// Assert the status after the comma, if the status is not as expected, then return the string before the comma
+			// Assert the status after the comma, if the status is not as expected, then return the string before the comma
 	}
 	
 	@Test

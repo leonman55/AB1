@@ -1,6 +1,7 @@
 package solutions.exercise1;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +26,7 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 
 	public List<PlayfieldElement> getPlayfieldElementsByType(ElementType type, Scenario scenario) throws NullPointerException
 	{
-		if (scenario == null && type == null) {
+		if (scenario == null || type == null) {
 		//check for null parameters
 			throw new NullPointerException("Parameter is not allowed to be null.");
 			//if at least 1 parameter is null, then throw the exception
@@ -56,28 +57,118 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 	    // TODO Auto-generated method stub
 		if(graph == null)
 		{
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Graph darf nicht null sein!");
 		}
-		
-	    return null;
+		Set<EnergyNode> nodes = graph.getNodes();
+		EnergyNode[] producers = (EnergyNode[]) nodes.toArray();
+		if(producers.length != 0)
+		{
+			ArrayList<ControllableProducer> back = new ArrayList<>();
+			ControllableProducer prod;
+			for(int i = 0; i < producers.length; i++)
+			{
+				if(producers[i] instanceof ControllableProducer)
+				{
+					prod = (ControllableProducer) producers[i];
+					back.add(prod); 
+				}
+			}
+			return back;
+		}
+		else
+		{
+			return new ArrayList<ControllableProducer>();
+		}
 	}
 
 	@Override
-	public List<ControllableConsumer> getControllableConsumers(Graph<EnergyNode, PowerLine> graph) {
+	public List<ControllableConsumer> getControllableConsumers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
+	{
 	    // TODO Auto-generated method stub
-	    return null;
+		if(graph == null)
+		{
+			throw new IllegalArgumentException("Graph darf nicht null sein!");
+		}
+		Set<EnergyNode> nodes = graph.getNodes();
+		EnergyNode[] consumers = (EnergyNode[]) nodes.toArray();
+		if(consumers.length != 0)
+		{
+			ArrayList<ControllableConsumer> back = new ArrayList<>();
+			ControllableConsumer con;
+			for(int i = 0; i < consumers.length; i++)
+			{
+				if(consumers[i] instanceof ControllableConsumer)
+				{
+					con = (ControllableConsumer) consumers[i];
+					back.add(con); 
+				}
+			}
+			return back;
+		}
+		else
+		{
+			return new ArrayList<ControllableConsumer>();
+		}
 	}
 
 	@Override
-	public List<Producer> getProducers(Graph<EnergyNode, PowerLine> graph) {
+	public List<Producer> getProducers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
+	{
 	    // TODO Auto-generated method stub
-	    return null;
+		if(graph == null)
+		{
+			throw new IllegalArgumentException("Graph darf nicht null sein!");
+		}
+		Set<EnergyNode> nodes = graph.getNodes();
+		EnergyNode[] producers = (EnergyNode[]) nodes.toArray();
+		if(producers.length != 0)
+		{
+			ArrayList<Producer> back = new ArrayList<>();
+			Producer prod;
+			for(int i = 0; i < producers.length; i++)
+			{
+				if(producers[i] instanceof Producer)
+				{
+					prod = (Producer) producers[i];
+					back.add(prod); 
+				}
+			}
+			return back;
+		}
+		else
+		{
+			return new ArrayList<Producer>();
+		}
 	}
 
 	@Override
-	public List<Consumer> getConsumers(Graph<EnergyNode, PowerLine> graph) {
+	public List<Consumer> getConsumers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
+	{
 	    // TODO Auto-generated method stub
-	    return null;
+		if(graph == null)
+		{
+			throw new IllegalArgumentException("Graph darf nicht null sein!");
+		}
+		Set<EnergyNode> nodes = graph.getNodes();
+		EnergyNode[] consumers = (EnergyNode[]) nodes.toArray();
+		if(consumers.length != 0)
+		{
+			ArrayList<Consumer> back = new ArrayList<>();
+			Consumer con;
+			for(int i = 0; i < consumers.length; i++)
+			{
+				if(consumers[i] instanceof Consumer)
+				{
+					con = (Consumer) consumers[i];
+					back.add(con); 
+				}
+			}
+			return back;
+		}
+		else
+		{
+			return new ArrayList<Consumer>();
+		}
 	}
 
 	@Override
@@ -95,11 +186,30 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 
 
 	@Override
-	public List<PowerLine> getPowerLinesByType(Graph<EnergyNode, PowerLine> graph, PowerLineType type)
+	public List<PowerLine> getPowerLinesByType(Graph<EnergyNode, PowerLine> graph, PowerLineType type) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
-		return null;
+		if(graph == null || type == null)
+		{
+			throw new IllegalArgumentException("graph und type darf nicht null sein!");
+		}
+		List<PowerLine> edges = graph.getEdges();
+		PowerLine[] lines = (PowerLine[]) edges.toArray();
+		if(lines.length != 0)
+		{
+			List<PowerLine> back = new ArrayList<>();
+			for(int i = 0; i < lines.length; i++)
+			{
+				if(lines[i].getType().equals(type))
+				{
+					back.add(lines[i]);
+				}
+			}
+			return back;
+		}
+		else
+		{
+			return new ArrayList<PowerLine>();
+		}
 	}
-
-
 }
