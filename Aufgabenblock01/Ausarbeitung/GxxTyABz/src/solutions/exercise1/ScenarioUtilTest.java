@@ -1,6 +1,7 @@
 package solutions.exercise1;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -14,6 +15,10 @@ import org.sopra.api.exercises.ExerciseSubmission;
 import org.sopra.api.exercises.exercise1.AbstractScenarioUtilTest;
 import org.sopra.api.model.PowerLine;
 import org.sopra.api.model.PowerLineType;
+import org.sopra.api.model.consumer.Consumer;
+import org.sopra.api.model.consumer.ControllableConsumer;
+import org.sopra.api.model.producer.ControllableProducer;
+import org.sopra.api.model.producer.Producer;
 
 public class ScenarioUtilTest extends AbstractScenarioUtilTest implements ExerciseSubmission{
 
@@ -81,51 +86,105 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	}
 
 	@Override
-	protected void testGetControllableProducers() {
+	@Test
+	public void testGetControllableProducers()
+	{
 	    // TODO Auto-generated method stub
-	    
+		List<ControllableProducer> prod = sut.getControllableProducers(graph1);
+		assertEquals(prod.size(), 4);
 	}
 
 	@Override
-	protected void testGetControllableProducers_Parameters() {
+	@Test
+	public void testGetControllableProducers_Parameters()
+	{
 	    // TODO Auto-generated method stub
-	    
+	    try
+	    {
+	    	List<ControllableProducer> prod = sut.getControllableProducers(null);
+	    	fail();
+	    }
+	    catch(IllegalArgumentException e)
+	    {
+	    	
+	    }
 	}
 
 	@Override
-	protected void testGetControllableConsumers() {
+	@Test
+	public void testGetControllableConsumers()
+	{
 	    // TODO Auto-generated method stub
-	    
+		List<ControllableConsumer> con = sut.getControllableConsumers(graph1);
+		assertEquals(con.size(), 3);
 	}
 
 	@Override
-	protected void testGetControllableConsumers_Parameters() {
+	@Test
+	public void testGetControllableConsumers_Parameters()
+	{
 	    // TODO Auto-generated method stub
-	    
+		try
+	    {
+	    	List<ControllableConsumer> con = sut.getControllableConsumers(null);
+	    	fail();
+	    }
+	    catch(IllegalArgumentException e)
+	    {
+	    	
+	    }
 	}
 
 	@Override
-	protected void testGetProducers() {
+	@Test
+	public void testGetProducers()
+	{
 	    // TODO Auto-generated method stub
-	    
+		List<Producer> prod = sut.getProducers(graph1);
+		System.out.println(prod.size());
+		assertEquals(prod.size(), 10);
 	}
 
 	@Override
-	protected void testGetProducers_Parameters() {
+	@Test
+	public void testGetProducers_Parameters()
+	{
 	    // TODO Auto-generated method stub
-	    
+		try
+	    {
+	    	List<Producer> prod = sut.getProducers(null);
+	    	fail();
+	    }
+	    catch(IllegalArgumentException e)
+	    {
+	    	
+	    }
 	}
 
 	@Override
-	protected void testGetConsumers() {
+	@Test
+	public void testGetConsumers()
+	{
 	    // TODO Auto-generated method stub
-	    
+		List<Consumer> con = sut.getConsumers(graph1);
+		System.out.println(con.size());
+		assertEquals(con.size(), 8);
 	}
 
 	@Override
-	protected void testGetConsumers_Parameters() {
+	@Test
+	public void testGetConsumers_Parameters()
+	{
 	    // TODO Auto-generated method stub
-	    
+		try
+	    {
+	    	List<Consumer> con = sut.getConsumers(null);
+	    	fail();
+	    }
+	    catch(IllegalArgumentException e)
+	    {
+	    	
+	    }
 	}
 
 	@Override
