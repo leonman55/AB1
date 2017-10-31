@@ -3,12 +3,12 @@ package solutions.exercise1;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 
 import org.junit.Test;
 import org.sopra.api.exercises.ExerciseSubmission;
@@ -30,7 +30,7 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
     		// will be given to the superior method, that called this method.
 		List<PowerLine> highVoltageLines = sut.getPowerLinesByType(graph1, PowerLineType.HIGH_VOLTAGE);
 			// Get a list of high voltage power lines
-		assertTrue("Number of high voltage lines", highVoltageLines.size()==11);
+		assertThat("Number of high voltage lines", highVoltageLines.size(), is(11));
 			// Assert the status after the comma, if the status is not as expected, then return the string before the comma
 		List<PowerLine> lowVoltageLines = sut.getPowerLinesByType(graph1, PowerLineType.LOW_VOLTAGE);
 			// Get a map of low voltage power lines & booleans
@@ -43,7 +43,7 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	
 	@Test
 	//Declaration that this method is a test method. If you run this class as JUnit Test, only the declared methods will run
-	public void testGetPowerLinesByType_Parameters() 
+	public void testGetPowerLinesByType_Parameters() // throws Exception
 	{
 			// The throws-declaration marks this method, that during the execution, there could be thrown an exception.
 			// Usually you use that declaration, if you don't want to handle the exception in this method. The exception
@@ -101,7 +101,8 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	    // TODO Auto-generated method stub
 	    try
 	    {
-	    	List<ControllableProducer> prod = sut.getControllableProducers(null);
+	    	sut.getControllableProducers(null);
+	    	//List<ControllableProducer> prod = sut.getControllableProducers(null);
 	    	fail();
 	    }
 	    catch(IllegalArgumentException e)
@@ -126,7 +127,8 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	    // TODO Auto-generated method stub
 		try
 	    {
-	    	List<ControllableConsumer> con = sut.getControllableConsumers(null);
+			sut.getControllableConsumers(null);
+	    	//List<ControllableConsumer> con = sut.getControllableConsumers(null);
 	    	fail();
 	    }
 	    catch(IllegalArgumentException e)
@@ -152,7 +154,8 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	    // TODO Auto-generated method stub
 		try
 	    {
-	    	List<Producer> prod = sut.getProducers(null);
+			sut.getProducers(null);
+	    	//List<Producer> prod = sut.getProducers(null);
 	    	fail();
 	    }
 	    catch(IllegalArgumentException e)
@@ -178,7 +181,8 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	    // TODO Auto-generated method stub
 		try
 	    {
-	    	List<Consumer> con = sut.getConsumers(null);
+			sut.getConsumers(null);
+	    	//List<Consumer> con = sut.getConsumers(null);
 	    	fail();
 	    }
 	    catch(IllegalArgumentException e)
