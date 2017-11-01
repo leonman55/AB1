@@ -22,13 +22,25 @@ import org.sopra.api.model.consumer.ControllableConsumer;
 import org.sopra.api.model.producer.ControllableProducer;
 import org.sopra.api.model.producer.Producer;
 
-public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
+/**
+ * 
+ * @author Isabelle, Leon, Pascal, Stefan
+ */
 
-	public List<PlayfieldElement> getPlayfieldElementsByType(Scenario scenario, ElementType type) throws NullPointerException
+public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
+{
+	
+	/**
+	 * returns all objects which match type from the given Scenario
+	 * @param scenario Loaded scenario from xml file
+	 * @param type Type which specifies the searched objects
+	 * @return a List with all matching PlayfieldElement objects
+	 */
+	public List<PlayfieldElement> getPlayfieldElementsByType(Scenario scenario, ElementType type)  throws IllegalArgumentException
 	{
 		if (scenario == null || type == null) {
 		//check for null parameters
-			throw new NullPointerException("Parameter is not allowed to be null.");
+			throw new IllegalArgumentException("Parameter is not allowed to be null.");
 			//if at least 1 parameter is null, then throw the exception
 		}
 		List<PlayfieldElement> ret = new ArrayList<>();
@@ -49,19 +61,27 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 		return ret;
 		// give the result back
 	}
-
-
+	
+	/**
+	 * returns a List of all ControllableProducer objects extracted from given graph
+	 * @param graph Contains all objects on the playfield
+	 * @throws IllegalArgumentException
+	 * @return a List with all ControllableProducer objects
+	 */
 	@Override
 	public List<ControllableProducer> getControllableProducers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
 	{
 		if(graph == null)
 		{
+			//check for null parameters
 			throw new IllegalArgumentException("Graph darf nicht null sein!");
+			//throw exception if null parameter detected
 		}
 		List<ControllableProducer> back = new ArrayList<>();
 		List<EnergyNode> nodes = new ArrayList<>(graph.getNodes());
 		
-		for (EnergyNode energyNode : nodes) {
+		for (EnergyNode energyNode : nodes)
+		{
 			if(energyNode instanceof ControllableProducer)
 			{
 				back.add((ControllableProducer)energyNode);
@@ -95,6 +115,12 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 //		}
 	}
 
+	/**
+	 * returns a List of all ControllableConsumer objects extracted from given graph
+	 * @param graph Contains all objects on the playfield
+	 * @throws IllegalArgumentException
+	 * @return a List with all ControllableConsumer objects
+	 */
 	@Override
 	public List<ControllableConsumer> getControllableConsumers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
 	{
@@ -140,6 +166,12 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 //		}
 	}
 
+	/**
+	 * returns a List of all Producer objects extracted from given graph
+	 * @param graph Contains all objects on the playfield
+	 * @throws IllegalArgumentException
+	 * @return a List with all Producer objects
+	 */
 	@Override
 	public List<Producer> getProducers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
 	{
@@ -184,7 +216,13 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 //			return new ArrayList<Producer>();
 //		}
 	}
-
+	
+	/**
+	 * returns a List of all Consumer objects extracted from given graph
+	 * @param graph Contains all objects on the playfield
+	 * @throws IllegalArgumentException
+	 * @return a List with all Consumer objects
+	 */
 	@Override
 	public List<Consumer> getConsumers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
 	{
@@ -231,12 +269,22 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 //		}
 	}
 
+	/**
+	 * returns the Team identifier in format GxxTyy
+	 * @return a String in given format
+	 */
 	@Override
 	public String getTeamIdentifier() {
 	    // TODO Auto-generated method stub
 	    return "G05T04";
 	}
 	
+	/**
+	 * returns all PowerLine objects from the given Scenario which match type
+	 * @param scenario Loaded scenario from xml file
+	 * @param type Type which specifies the searched objects
+	 * @return a List with all matching PlayfieldElement objects
+	 */
 	@Override
 	public List<PowerLine> getPowerLinesByType(Graph<EnergyNode, PowerLine> graph, PowerLineType type) throws IllegalArgumentException
 	{
@@ -251,7 +299,7 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 		for (PowerLine powerLine : lines) {
 			if(powerLine.getType()==type)
 			{
-				
+				back.add(powerLine);
 			}
 		}
 		

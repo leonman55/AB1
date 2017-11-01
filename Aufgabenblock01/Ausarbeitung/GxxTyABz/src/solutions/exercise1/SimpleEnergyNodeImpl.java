@@ -33,7 +33,7 @@ public abstract class SimpleEnergyNodeImpl implements SimpleEnergyNode, Exercise
 	public String getName()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return "EnergyNode";
 	}
 
 	@Override

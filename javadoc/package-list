@@ -1,0 +1,12 @@
+org.sopra.api
+org.sopra.api.command
+org.sopra.api.exercises
+org.sopra.api.exercises.exercise1
+org.sopra.api.exercises.exercise2
+org.sopra.api.exercises.exercise3
+org.sopra.api.exercises.exercise4
+org.sopra.api.exercises.exercise5
+org.sopra.api.model
+org.sopra.api.model.consumer
+org.sopra.api.model.producer
+org.sopra.api.util.scenarioloader

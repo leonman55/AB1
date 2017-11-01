@@ -14,6 +14,6 @@ public class SimpleSolarPowerPlantImpl extends SimpleEnergyNodeImpl implements S
 	public String getProducerName()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return super.getName() + ": SolarPowerPlant";
 	}
 }
