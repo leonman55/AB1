@@ -194,6 +194,6 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	@Override
 	public String getTeamIdentifier() {
 	    // TODO Auto-generated method stub
-	    return null;
+	    return "G05T04";
 	}
 }

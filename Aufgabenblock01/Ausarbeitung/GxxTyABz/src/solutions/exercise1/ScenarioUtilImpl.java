@@ -234,7 +234,7 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil {
 	@Override
 	public String getTeamIdentifier() {
 	    // TODO Auto-generated method stub
-	    return null;
+	    return "G05T04";
 	}
 	
 	@Override

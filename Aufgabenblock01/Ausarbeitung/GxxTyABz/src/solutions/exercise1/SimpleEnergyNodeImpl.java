@@ -19,7 +19,7 @@ public abstract class SimpleEnergyNodeImpl implements SimpleEnergyNode, Exercise
 	public String getTeamIdentifier()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return "G05T04";
 	}
 
 	@Override
