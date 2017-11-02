@@ -293,11 +293,12 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 		{
 			throw new IllegalArgumentException("graph und type darf nicht null sein!");
 		}
-		List<PowerLine> lines = graph.getEdges();
-		List<PowerLine> back = new ArrayList<>();
+		ArrayList<PowerLine> lines = (ArrayList<PowerLine>) graph.getEdges();
+		ArrayList<PowerLine> back = new ArrayList<PowerLine>();
 		
-		for (PowerLine powerLine : lines) {
-			if(powerLine.getType()==type)
+		for (PowerLine powerLine : lines)
+		{
+			if(powerLine.getType() == type)
 			{
 				back.add(powerLine);
 			}

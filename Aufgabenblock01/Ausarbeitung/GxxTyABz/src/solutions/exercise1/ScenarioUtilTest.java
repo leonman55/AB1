@@ -42,46 +42,34 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	}
 	
 	@Test
-	//Declaration that this method is a test method. If you run this class as JUnit Test, only the declared methods will run
-	public void testGetPowerLinesByType_Parameters() // throws Exception
+	public void testGetPowerLinesByType_Parameters()
 	{
-			// The throws-declaration marks this method, that during the execution, there could be thrown an exception.
-			// Usually you use that declaration, if you don't want to handle the exception in this method. The exception
-			// will be given to the superior method, that called this method.
 		try
 		{
-				// The keyword try marks a command-block that could throw an exception
 			sut.getPowerLinesByType(null, null);
 			fail();
-				// Try to call the method with that parameters, from sut (System Under Test)
 		}
 		catch (IllegalArgumentException e)
 		{
-				// The keyword catch marks a block in which the exception is going to be handled
-				// If this point is reached, the test will fail!
+				
 		}
 		try
 		{
-				// The keyword try marks a command-block that could throw an exception
 			sut.getPowerLinesByType(null, PowerLineType.HIGH_VOLTAGE);
-				// Try to call the method with that parameters, from sut (System Under Test)
 			fail();
-				// If this point is reached, the test will fail!
 		}
 		catch (IllegalArgumentException e)
 		{
-			// The keyword catch marks a block in which the exception is going to be handled
+			
 		}
 		try
 		{
-				// The keyword try marks a command-block that could throw an exception
-			sut.getPowerLinesByType(graph1, PowerLineType.HIGH_VOLTAGE);
-				// Try to call the method with that parameters, from sut (System Under Test)
-				// If this point is reached, the test will fail!
+			sut.getPowerLinesByType(graph1, null);
+			fail();
 		}
 		catch (IllegalArgumentException e)
 		{
-				// The keyword catch marks a block in which the exception is going to be handled
+			
 		}
 	}
 
