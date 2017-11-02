@@ -20,20 +20,25 @@ import org.sopra.api.model.consumer.ControllableConsumer;
 import org.sopra.api.model.producer.ControllableProducer;
 import org.sopra.api.model.producer.Producer;
 
+/**
+ * @author Isabelle, Leon, Pascal, Stefan
+ */
+
 public class ScenarioUtilTest extends AbstractScenarioUtilTest implements ExerciseSubmission{
 
-    	@Test
+	/**
+	 * tests the functionality of the method getPowerLinesByType
+	 */
+    @Test
 	//Declaration that this method is a test method. If you run this class as JUnit Test, only the declared methods will run
-	public void testGetPowerLinesByType() {
-    		// The throws-declaration marks this method, that during the execution, there could be thrown an exception.
-    		// Usually you use that declaration, if you don't want to handle the exception in this method. The exception
-    		// will be given to the superior method, that called this method.
+	public void testGetPowerLinesByType()
+    {
 		List<PowerLine> highVoltageLines = sut.getPowerLinesByType(graph1, PowerLineType.HIGH_VOLTAGE);
 			// Get a list of high voltage power lines
 		assertThat("Number of high voltage lines", highVoltageLines.size(), is(11));
 			// Assert the status after the comma, if the status is not as expected, then return the string before the comma
 		List<PowerLine> lowVoltageLines = sut.getPowerLinesByType(graph1, PowerLineType.LOW_VOLTAGE);
-			// Get a map of low voltage power lines & booleans
+			// Get a list of low voltage power lines
 		assertThat("Number of low voltage lines", lowVoltageLines.size(), is(3));
 			// Assert the status after the comma, if the status is not as expected, then return the string before the comma
 		List<PowerLine> mediumVoltageLines = sut.getPowerLinesByType(graph1, PowerLineType.MEDIUM_VOLTAGE);
@@ -41,6 +46,9 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 			// Assert the status after the comma, if the status is not as expected, then return the string before the comma
 	}
 	
+    /**
+     * tests the correct null element handling of the method getPowerLinesByType
+     */
 	@Test
 	public void testGetPowerLinesByType_Parameters()
 	{
@@ -73,24 +81,27 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 		}
 	}
 
+	/**
+	 * tests the functionality of the method getControllableProducers
+	 */
 	@Override
 	@Test
 	public void testGetControllableProducers()
 	{
-	    // TODO Auto-generated method stub
 		List<ControllableProducer> prod = sut.getControllableProducers(graph1);
 		assertEquals(prod.size(), 4);
 	}
 
+	/**
+	 * tests the correct null element handling of the method getControllableProducers
+	 */
 	@Override
 	@Test
 	public void testGetControllableProducers_Parameters()
 	{
-	    // TODO Auto-generated method stub
 	    try
 	    {
 	    	sut.getControllableProducers(null);
-	    	//List<ControllableProducer> prod = sut.getControllableProducers(null);
 	    	fail();
 	    }
 	    catch(IllegalArgumentException e)
@@ -99,20 +110,24 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	    }
 	}
 
+	/**
+	 * tests the functionality of the method getControllableConsumers
+	 */
 	@Override
 	@Test
 	public void testGetControllableConsumers()
 	{
-	    // TODO Auto-generated method stub
 		List<ControllableConsumer> con = sut.getControllableConsumers(graph1);
 		assertEquals(con.size(), 3);
 	}
 
+	/**
+	 * tests the correct null element handling of the method getControllableConsumers
+	 */
 	@Override
 	@Test
 	public void testGetControllableConsumers_Parameters()
 	{
-	    // TODO Auto-generated method stub
 		try
 	    {
 			sut.getControllableConsumers(null);
@@ -125,25 +140,28 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	    }
 	}
 
+	/**
+	 * tests the functionality of the method getProducers
+	 */
 	@Override
 	@Test
 	public void testGetProducers()
 	{
-	    // TODO Auto-generated method stub
 		List<Producer> prod = sut.getProducers(graph1);
 		System.out.println(prod.size());
 		assertEquals(prod.size(), 10);
 	}
 
+	/**
+	 * tests the correct null element handling of the method getProducers
+	 */
 	@Override
 	@Test
 	public void testGetProducers_Parameters()
 	{
-	    // TODO Auto-generated method stub
 		try
 	    {
 			sut.getProducers(null);
-	    	//List<Producer> prod = sut.getProducers(null);
 	    	fail();
 	    }
 	    catch(IllegalArgumentException e)
@@ -152,21 +170,25 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	    }
 	}
 
+	/**
+	 * tests the functionality of the method getConsumers
+	 */
 	@Override
 	@Test
 	public void testGetConsumers()
 	{
-	    // TODO Auto-generated method stub
 		List<Consumer> con = sut.getConsumers(graph1);
 		System.out.println(con.size());
 		assertEquals(con.size(), 8);
 	}
 
+	/**
+	 * tests the correct null element handling of the method getConsumers
+	 */
 	@Override
 	@Test
 	public void testGetConsumers_Parameters()
 	{
-	    // TODO Auto-generated method stub
 		try
 	    {
 			sut.getConsumers(null);
@@ -179,9 +201,12 @@ public class ScenarioUtilTest extends AbstractScenarioUtilTest implements Exerci
 	    }
 	}
 
+	/**
+	 * tests the correct null element handling of the method getProducers
+	 */
 	@Override
-	public String getTeamIdentifier() {
-	    // TODO Auto-generated method stub
+	public String getTeamIdentifier()
+	{
 	    return "G05T04";
 	}
 }

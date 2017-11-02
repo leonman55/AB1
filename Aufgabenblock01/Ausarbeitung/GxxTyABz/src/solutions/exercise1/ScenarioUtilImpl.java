@@ -23,7 +23,6 @@ import org.sopra.api.model.producer.ControllableProducer;
 import org.sopra.api.model.producer.Producer;
 
 /**
- * 
  * @author Isabelle, Leon, Pascal, Stefan
  */
 
@@ -38,20 +37,24 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 	 */
 	public List<PlayfieldElement> getPlayfieldElementsByType(Scenario scenario, ElementType type)  throws IllegalArgumentException
 	{
-		if (scenario == null || type == null) {
+		if (scenario == null || type == null)
+		{
 		//check for null parameters
 			throw new IllegalArgumentException("Parameter is not allowed to be null.");
 			//if at least 1 parameter is null, then throw the exception
 		}
 		List<PlayfieldElement> ret = new ArrayList<>();
 		// A Deque is a Double-Ended-Queue. A Queue is a special List, where you just can add something new at the beginning
-		for (int x = 0; x <= scenario.getPlayfield().getHorizontalSize()-1; x++) {
+		for (int x = 0; x <= scenario.getPlayfield().getHorizontalSize()-1; x++)
+		{
 		//Iterate over the whole play field in horizontal direction (x-axes)
-			for (int y = scenario.getPlayfield().getVerticalSize()-1; y >= 0; y--) {
+			for (int y = scenario.getPlayfield().getVerticalSize()-1; y >= 0; y--)
+			{
 				//Iterate over the whole play field in vertical direction (y-axes)
 				PlayfieldElement element = scenario.getPlayfield().getPlayfieldElement(x, y);
 				//Take the play field element by the iterated position (x,y)
-				if (element.getElementType() == type) {
+				if (element.getElementType() == type)
+				{
 				//check if the element type is the same as the searched one
 					ret.add(element);
 					//if it is the same, then add the current play field element to the result list
@@ -73,9 +76,7 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 	{
 		if(graph == null)
 		{
-			//check for null parameters
 			throw new IllegalArgumentException("Graph darf nicht null sein!");
-			//throw exception if null parameter detected
 		}
 		List<ControllableProducer> back = new ArrayList<>();
 		List<EnergyNode> nodes = new ArrayList<>(graph.getNodes());
@@ -87,32 +88,7 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 				back.add((ControllableProducer)energyNode);
 			}
 		}
-		
 		return back;
-		
-		/*
-		 * Leons alter Code
-		 */
-//		Set<EnergyNode> nodes = graph.getNodes();
-//		EnergyNode[] producers = (EnergyNode[]) nodes.toArray();
-//		if(producers.length != 0)
-//		{
-//			ArrayList<ControllableProducer> back = new ArrayList<>();
-//			ControllableProducer prod;
-//			for(int i = 0; i < producers.length; i++)
-//			{
-//				if(producers[i] instanceof ControllableProducer)
-//				{
-//					prod = (ControllableProducer) producers[i];
-//					back.add(prod); 
-//				}
-//			}
-//			return back;
-//		}
-//		else
-//		{
-//			return new ArrayList<ControllableProducer>();
-//		}
 	}
 
 	/**
@@ -124,7 +100,6 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 	@Override
 	public List<ControllableConsumer> getControllableConsumers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
 	{
-	    // TODO Auto-generated method stub
 		if(graph == null)
 		{
 			throw new IllegalArgumentException("Graph darf nicht null sein!");
@@ -132,38 +107,14 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 		List<ControllableConsumer> back = new ArrayList<>();
 		List<EnergyNode> nodes = new ArrayList<>(graph.getNodes());
 		
-		for (EnergyNode energyNode : nodes) {
+		for (EnergyNode energyNode : nodes)
+		{
 			if(energyNode instanceof ControllableConsumer)
 			{
 				back.add((ControllableConsumer)energyNode);
 			}
 		}
-		
 		return back;
-		
-		/*
-		 * Leons alter Code
-		 */
-//		Set<EnergyNode> nodes = graph.getNodes();
-//		EnergyNode[] consumers = (EnergyNode[]) nodes.toArray();
-//		if(consumers.length != 0)
-//		{
-//			ArrayList<ControllableConsumer> back = new ArrayList<>();
-//			ControllableConsumer con;
-//			for(int i = 0; i < consumers.length; i++)
-//			{
-//				if(consumers[i] instanceof ControllableConsumer)
-//				{
-//					con = (ControllableConsumer) consumers[i];
-//					back.add(con); 
-//				}
-//			}
-//			return back;
-//		}
-//		else
-//		{
-//			return new ArrayList<ControllableConsumer>();
-//		}
 	}
 
 	/**
@@ -175,7 +126,6 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 	@Override
 	public List<Producer> getProducers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
 	{
-	    // TODO Auto-generated method stub
 		if(graph == null)
 		{
 			throw new IllegalArgumentException("Graph darf nicht null sein!");
@@ -183,38 +133,14 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 		List<Producer> back = new ArrayList<>();
 		List<EnergyNode> nodes = new ArrayList<>(graph.getNodes());
 		
-		for (EnergyNode energyNode : nodes) {
+		for (EnergyNode energyNode : nodes)
+		{
 			if(energyNode instanceof Producer)
 			{
 				back.add((Producer)energyNode);
 			}
 		}
-		
 		return back;
-		
-		/*
-		 * Leons alter Code
-		 */
-//		Set<EnergyNode> nodes = graph.getNodes();
-//		EnergyNode[] producers = (EnergyNode[]) nodes.toArray();
-//		if(producers.length != 0)
-//		{
-//			ArrayList<Producer> back = new ArrayList<>();
-//			Producer prod;
-//			for(int i = 0; i < producers.length; i++)
-//			{
-//				if(producers[i] instanceof Producer)
-//				{
-//					prod = (Producer) producers[i];
-//					back.add(prod); 
-//				}
-//			}
-//			return back;
-//		}
-//		else
-//		{
-//			return new ArrayList<Producer>();
-//		}
 	}
 	
 	/**
@@ -226,47 +152,21 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 	@Override
 	public List<Consumer> getConsumers(Graph<EnergyNode, PowerLine> graph) throws IllegalArgumentException
 	{
-	    // TODO Auto-generated method stub
 		if(graph == null)
 		{
 			throw new IllegalArgumentException("Graph darf nicht null sein!");
 		}
-		
 		List<Consumer> back = new ArrayList<>();
 		List<EnergyNode> nodes = new ArrayList<>(graph.getNodes());
 		
-		for (EnergyNode energyNode : nodes) {
+		for (EnergyNode energyNode : nodes)
+		{
 			if(energyNode instanceof Consumer)
 			{
 				back.add((Consumer)energyNode);
 			}
 		}
-		
 		return back;
-		
-		/*
-		 * Leons alter Code
-		 */
-//		Set<EnergyNode> nodes = graph.getNodes();
-//		EnergyNode[] consumers = (EnergyNode[]) nodes.toArray();
-//		if(consumers.length != 0)
-//		{
-//			ArrayList<Consumer> back = new ArrayList<>();
-//			Consumer con;
-//			for(int i = 0; i < consumers.length; i++)
-//			{
-//				if(consumers[i] instanceof Consumer)
-//				{
-//					con = (Consumer) consumers[i];
-//					back.add(con); 
-//				}
-//			}
-//			return back;
-//		}
-//		else
-//		{
-//			return new ArrayList<Consumer>();
-//		}
 	}
 
 	/**
@@ -274,8 +174,8 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 	 * @return a String in given format
 	 */
 	@Override
-	public String getTeamIdentifier() {
-	    // TODO Auto-generated method stub
+	public String getTeamIdentifier()
+	{
 	    return "G05T04";
 	}
 	
@@ -288,7 +188,6 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 	@Override
 	public List<PowerLine> getPowerLinesByType(Graph<EnergyNode, PowerLine> graph, PowerLineType type) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
 		if(graph == null || type == null)
 		{
 			throw new IllegalArgumentException("graph und type darf nicht null sein!");
@@ -303,25 +202,6 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 				back.add(powerLine);
 			}
 		}
-		
 		return back;
-		
-//		PowerLine[] lines = (PowerLine[]) edges.toArray();
-//		if(lines.length != 0)
-//		{
-//			List<PowerLine> back = new ArrayList<>();
-//			for(int i = 0; i < lines.length; i++)
-//			{
-//				if(lines[i].getType().equals(type))
-//				{
-//					back.add(lines[i]);
-//				}
-//			}
-//			return back;
-//		}
-//		else
-//		{
-//			return new ArrayList<PowerLine>();
-//		}
 	}
 }
