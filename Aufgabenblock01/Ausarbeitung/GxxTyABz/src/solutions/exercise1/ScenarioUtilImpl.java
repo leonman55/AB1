@@ -181,8 +181,9 @@ public class ScenarioUtilImpl implements ExerciseSubmission, ScenarioUtil
 	
 	/**
 	 * returns all PowerLine objects from the given Scenario which match type
-	 * @param scenario Loaded scenario from xml file
+	 * @param graph Loaded scenario from xml file
 	 * @param type Type which specifies the searched objects
+	 * @throws IllegalArgumentException
 	 * @return a List with all matching PlayfieldElement objects
 	 */
 	@Override
