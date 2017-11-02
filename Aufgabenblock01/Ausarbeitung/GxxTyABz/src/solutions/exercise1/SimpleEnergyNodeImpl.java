@@ -55,6 +55,7 @@ public abstract class SimpleEnergyNodeImpl implements SimpleEnergyNode, Exercise
 
 	/**
 	 * getter method for x position of the node
+	 * @return x position of the node
 	 */
 	@Override
 	public int getXPos()
@@ -64,6 +65,7 @@ public abstract class SimpleEnergyNodeImpl implements SimpleEnergyNode, Exercise
 
 	/**
 	 * getter method for y position of the node
+	 * @return y position of the node
 	 */
 	@Override
 	public int getYPos()
