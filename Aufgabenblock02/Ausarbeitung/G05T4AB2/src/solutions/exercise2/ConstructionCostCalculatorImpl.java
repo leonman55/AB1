@@ -19,9 +19,16 @@ public class ConstructionCostCalculatorImpl implements ConstructionCostCalculato
 
 	private Scenario scenario;
 
-	public ConstructionCostCalculatorImpl(Scenario scenario)
+	public ConstructionCostCalculatorImpl(Scenario scenario) throws IllegalArgumentException
 	{
-		this.scenario = scenario;
+		if(scenario == null)
+		{
+			throw new IllegalArgumentException("scenario must not be null!");
+		}
+		else
+		{
+			this.scenario = scenario;
+		}
 	}
 
 	@Override
