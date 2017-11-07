@@ -7,11 +7,22 @@ import org.sopra.api.exercises.ExerciseSubmission;
 import org.sopra.api.model.PlayfieldElement;
 import org.sopra.api.model.producer.ProducerType;
 
+/**
+ * @author Isabelle, Leon, Pascal, Stefan
+ */
+
 public class PlayfieldElementComparator implements Comparator<PlayfieldElement>, ExerciseSubmission
 {
 	private ProducerType type;
 	private Scenario scenario;
 	private ConstructionCostCalculatorImpl calculator;
+	
+	/**
+	 * Constructor for a new PlayfieldElementComparator object
+	 * @param type the type of the producer
+	 * @param scenario loaded Scenario from xml file
+	 * @throws IllegalArgumentException if type or scenario is null
+	 */
 	
 	public PlayfieldElementComparator(ProducerType type, Scenario scenario) throws IllegalArgumentException
 	{
@@ -27,16 +38,25 @@ public class PlayfieldElementComparator implements Comparator<PlayfieldElement>,
 		}
 	}
 	
+	/**
+	 * Method which returns the team number of the programming team
+	 * @return specific team number
+	 */
 	@Override
 	public String getTeamIdentifier()
 	{
 		return "G05T04";
 	}
 
+	/**
+	 * Compares the production cost for a specific producer type on two different playfield locations
+	 * @param e1 playfield location one
+	 * @param e2 playfield location two
+	 * @return {@inheritDoc}
+	 */
 	@Override
 	public int compare(PlayfieldElement e1, PlayfieldElement e2) throws NullPointerException
 	{
-		// TODO Auto-generated method stub
 		if(e1 == null || e2 == null)
 		{
 			throw new NullPointerException("e1 and e2 must not be null!");

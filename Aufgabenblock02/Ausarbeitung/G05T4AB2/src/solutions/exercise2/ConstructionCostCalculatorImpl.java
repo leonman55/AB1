@@ -7,6 +7,10 @@ import org.sopra.api.model.PlayfieldElement;
 import org.sopra.api.model.PlayfieldElement.ElementType;
 import org.sopra.api.model.producer.ProducerType;
 
+/**
+ * @author Isabelle, Leon, Pascal, Stefan
+ */
+
 public class ConstructionCostCalculatorImpl implements ConstructionCostCalculator, ExerciseSubmission
 {
 	private static double extremelyLow = 0.5;
@@ -19,6 +23,11 @@ public class ConstructionCostCalculatorImpl implements ConstructionCostCalculato
 
 	private Scenario scenario;
 
+	/**
+	 * Constructor for a new ConstructionCostCalculatorImpl object
+	 * @param scenario loaded Scenario from xml file
+	 * @throws IllegalArgumentException if scenario is null exception is thrown
+	 */
 	public ConstructionCostCalculatorImpl(Scenario scenario) throws IllegalArgumentException
 	{
 		if(scenario == null)
@@ -31,12 +40,22 @@ public class ConstructionCostCalculatorImpl implements ConstructionCostCalculato
 		}
 	}
 
+	/**
+	 * Method which returns the team number of the programming team
+	 * @return specific team number
+	 */
 	@Override
 	public String getTeamIdentifier()
 	{
 		return "G05T04";
 	}
 
+	/**
+	 * Method which calculates the specific cost for a ProducerType on the given location
+	 * @param location specifies the location type on the playfield
+	 * @param type specifies the type of producer
+	 * @return the amount of the construction costs
+	 */
 	@Override
 	public double calculateCost(PlayfieldElement location, ProducerType type) throws IllegalArgumentException
 	{
