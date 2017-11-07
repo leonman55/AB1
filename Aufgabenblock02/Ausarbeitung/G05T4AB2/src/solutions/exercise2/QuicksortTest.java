@@ -65,8 +65,13 @@ public class QuicksortTest extends AbstractQuicksortTest implements ExerciseSubm
 	}
 
 	@Override
+	@Test
 	public void testQuicksort() {
-		// TODO Auto-generated method stub
+		Integer[] arr1 = { 8, 3, 6, 4, 1 };
+		Integer[] ergebnis = { 1, 3, 4, 6, 8 };
+		sut.quicksort(arr1, 0, 4);
+		
+		assertArrayEquals(arr1, ergebnis);
 
 	}
 
@@ -79,7 +84,7 @@ public class QuicksortTest extends AbstractQuicksortTest implements ExerciseSubm
 	@Override
 	public String getTeamIdentifier() {
 		// TODO Auto-generated method stub
-		return null;
+		return "G05T04";
 	}
 
 }

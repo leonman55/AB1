@@ -1,5 +1,6 @@
 package solutions.exercise2;
 
+//import java.lang.reflect.Array;
 import java.util.Comparator;
 
 import org.sopra.api.exercises.ExerciseSubmission;
@@ -12,13 +13,13 @@ import org.sopra.api.exercises.exercise2.Quicksort;
  */
 public class QuicksortImpl<T> implements Quicksort<T>, ExerciseSubmission {
 
-	private Comparator<T> comparator;
+	private final Comparator<T> comparator;
 
-	QuicksortImpl(Comparator<T> comparator) throws IllegalArgumentException {
+	public QuicksortImpl(Comparator<T> comparator) throws IllegalArgumentException {
 		if (comparator == null) {
 			throw new IllegalArgumentException("Parameter is not allowed to be null");
 		}
-
+		this.comparator = comparator;
 	}
 
 	/**
@@ -32,7 +33,7 @@ public class QuicksortImpl<T> implements Quicksort<T>, ExerciseSubmission {
 	@Override
 	public int partition(T[] arr, int left, int right) {
 		// TODO Noch mehr zu prüfen?
-		if (arr == null || left >= right || left < 0 || right < 0 || right > arr.length ) {
+		if (arr == null || left > right || left < 0 || right < 0 || right > arr.length - 1 || left > arr.length - 1) {
 			throw new IllegalArgumentException("Wrong Parameter(s)");
 		}
 		// Pivo Element in die Mitte setzen
@@ -81,13 +82,14 @@ public class QuicksortImpl<T> implements Quicksort<T>, ExerciseSubmission {
 			throw new IllegalArgumentException("Parameter is not allowed to be null");
 		}
 
-		int treffpunkt = partition(arr, left, right);
-
-		if (left < treffpunkt) {
-			quicksort(arr, left, treffpunkt-1);
-		}
-		if (right > treffpunkt) {
-			quicksort(arr, treffpunkt, right);
+		if (left < right) {
+			int treffpunkt = partition(arr, left, right);
+			if (left < treffpunkt) {
+				quicksort(arr, left, treffpunkt - 1);
+			}
+			if (right > treffpunkt) {
+				quicksort(arr, treffpunkt, right);
+			}
 		}
 
 	}
