@@ -21,14 +21,14 @@ public class PlayfieldElementComparator implements Comparator<PlayfieldElement>,
 	 * Constructor for a new PlayfieldElementComparator object
 	 * @param type the type of the producer
 	 * @param scenario loaded Scenario from xml file
-	 * @throws IllegalArgumentException if type or scenario is null
+	 * @throws NullPointerException if type or scenario is null
 	 */
 	
-	public PlayfieldElementComparator(ProducerType type, Scenario scenario) throws IllegalArgumentException
+	public PlayfieldElementComparator(ProducerType type, Scenario scenario) throws NullPointerException
 	{
 		if(type == null || scenario == null)
 		{
-			throw new IllegalArgumentException("type and scenario must not be null!");
+			throw new NullPointerException("type and scenario must not be null!");
 		}
 		else
 		{

@@ -7,13 +7,13 @@ import org.sopra.api.exercises.ExerciseSubmission;
 import org.sopra.api.exercises.exercise2.Quicksort;
 
 /**
- * Implementation of the Quicksort algorithm
+ * Implementation des Quicksort Algorithmus
  * 
  * @author Isabelle, Leon, Pascal, Stefan
  */
 public class QuicksortImpl<T> implements Quicksort<T>, ExerciseSubmission {
 
-	private final Comparator<T> comparator;
+	private Comparator<T> comparator;
 
 	public QuicksortImpl(Comparator<T> comparator) throws IllegalArgumentException {
 		if (comparator == null) {
@@ -23,12 +23,14 @@ public class QuicksortImpl<T> implements Quicksort<T>, ExerciseSubmission {
 	}
 
 	/**
-	 * Aufteilung des Arguments in zwei Gruppen. Die erste beinhaltet Werte die
-	 * kleiner(/gleich) als das mittlere Element und die zweite Werte
-	 * groesser(/gleich) dem mittleren Element.
+	 * Aufteilung des Arrays in zwei Gruppen. Die erste beinhaltet Werte die
+	 * kleiner(/gleich) als das Element mit Index i sind und die zweite Werte
+	 * groesser(/gleich) dem Element mit Index i.
 	 * 
-	 * @param
-	 * @return
+	 * @param arr zu partitionierendes Array
+	 * @param left linke Grenze des zu partitionierendes Intervalls
+	 * @param right rechte Grenze des zu partitionierendes Intervalls
+	 * @return i Index an dem sich die beiden Gruppen treffen
 	 */
 	@Override
 	public int partition(T[] arr, int left, int right) {
@@ -72,9 +74,12 @@ public class QuicksortImpl<T> implements Quicksort<T>, ExerciseSubmission {
 	}
 
 	/**
-	 * Sortieren der Argumente
+	 * Sortieren eines Array innerhalb des vorgegebenen Intervalls.
 	 * 
-	 * @param
+	 * @param arr zu sortierendes Array
+	 * @param left linke Grenze des zu sortierenden Intervalls
+	 * @param right rechte Grenze des zu sortierenden Intervalls
+	 * 
 	 */
 	@Override
 	public void quicksort(T[] arr, int left, int right) {
