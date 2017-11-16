@@ -13,7 +13,7 @@ import org.sopra.api.exercises.exercise2.Quicksort;
  */
 public class QuicksortImpl<T> implements Quicksort<T>, ExerciseSubmission {
 
-	private final Comparator<T> comparator;
+	private Comparator<T> comparator;
 
 	public QuicksortImpl(Comparator<T> comparator) throws IllegalArgumentException {
 		if (comparator == null) {
