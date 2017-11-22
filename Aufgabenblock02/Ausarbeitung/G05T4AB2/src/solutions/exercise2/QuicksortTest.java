@@ -1,28 +1,15 @@
 package solutions.exercise2;
 
-<<<<<<< HEAD
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
-=======
-import static org.junit.Assert.*;
-
-import org.junit.Test;
->>>>>>> leonman55AB03
 import org.sopra.api.exercises.ExerciseSubmission;
 import org.sopra.api.exercises.exercise2.AbstractQuicksortTest;
 
-/**
- * @author Isabelle, Leon, Pascal, Stefan
- */
-<<<<<<< HEAD
 public class QuicksortTest extends AbstractQuicksortTest implements ExerciseSubmission {
 
-	/*
-	 * Test ob die Methode sut.partition ihre Funktion erfüllt
-	 */
 	@Test
 	public void testPartition() {
 
@@ -80,10 +67,6 @@ public class QuicksortTest extends AbstractQuicksortTest implements ExerciseSubm
 
 	}
 
-	/*
-	 * Test ob die Methode sut.partition falsch übergebende bzw fehlerhafte
-	 * Parameter richtig erkennt
-	 */
 	@Test
 	public void testPartition_Parameters() {
 		Integer[] arr = { 1, 2, 3 };
@@ -149,15 +132,13 @@ public class QuicksortTest extends AbstractQuicksortTest implements ExerciseSubm
 
 	}
 
-	/*
-	 * Test ob die Methode sut.quicksort ihre Funktion erfüllt
-	 */
 	@Override
 	@Test
 	public void testQuicksort() {
 		Integer[] arr1 = { 8, 3, 6, 4, 1 };
 		Integer[] ergebnis1 = { 1, 3, 4, 6, 8 };
 		sut.quicksort(arr1, 0, arr1.length - 1);
+
 		assertArrayEquals(arr1, ergebnis1);
 
 		Integer[] arr3 = { 1, 12, 5, 26, 7, 14, 3, 7, 2, };
@@ -172,8 +153,11 @@ public class QuicksortTest extends AbstractQuicksortTest implements ExerciseSubm
 	}
 
 	/*
-	 * Test ob die Methode sut.quicksort falsch übergebende bzw fehlerhafte
-	 * Parameter richtig erkennt
+	 * Test ob methode sut.quicksort falschübergebende bzw fehlerhafte Parameter
+	 * richtig erkennt.
+	 * 
+	 * @see org.sopra.api.exercises.exercise2.AbstractQuicksortTest#
+	 * testQuicksort_Parameters()
 	 */
 
 	@Override
@@ -244,49 +228,6 @@ public class QuicksortTest extends AbstractQuicksortTest implements ExerciseSubm
 	@Override
 	public String getTeamIdentifier() {
 		// TODO Auto-generated method stub
-=======
-public class QuicksortTest extends AbstractQuicksortTest implements ExerciseSubmission
-{
-	Integer[] testint = {5, 8, 1, 5, 76, 3, 8, 9, 10};
-	
-	@Override
-	@Test
-	public void testPartition()
-	{
-		// TODO Auto-generated method stub
-		int back = sut.partition(testint, 0, 8);
-		System.out.println(back);
-		assertEquals(back, 76);
-	}
-
-	@Override
-	@Test
-	public void testPartition_Parameters()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	@Test
-	public void testQuicksort()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	@Test
-	public void testQuicksort_Parameters()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public String getTeamIdentifier()
-	{
->>>>>>> leonman55AB03
 		return "G05T04";
 	}
 
