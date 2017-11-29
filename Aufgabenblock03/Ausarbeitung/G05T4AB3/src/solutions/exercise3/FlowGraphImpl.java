@@ -3,8 +3,10 @@ package solutions.exercise3;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -30,30 +32,24 @@ public class FlowGraphImpl<V> implements FlowGraph<V>, ExerciseSubmission
 	@Override
 	public FlowEdge<V> addEdge(V start, V dest, int capacity)
 	{
-		if(start == null || dest == null || capacity < 0)
+		if(this.containsNode(start) == false || this.containsNode(dest) == false)
 		{
-			throw new NullPointerException("Arguments must not be null and capacity not lower 0!");
+			throw new NoSuchElementException("Element start or end not found!");
 		}
 		else
 		{
-			if(this.containsNode(start) == false || this.containsNode(dest) == false)
+			if(this.outerMap.get(start).containsKey(dest) == false)
 			{
-				throw new NoSuchElementException("Element start or end not found!");
+				this.outerMap.get(start).put(dest, new FlowEdgeImpl<V>(start, dest, capacity));
+				return this.outerMap.get(start).get(dest);
 			}
 			else
 			{
-				if(this.outerMap.get(start).containsKey(dest) == false)
-				{
-					return this.outerMap.get(start).put(dest, new FlowEdgeImpl<V>(start, dest, capacity));
-				}
-				else
-				{
-					return this.outerMap.get(start).get(dest);
-				}
+				return this.outerMap.get(start).get(dest);
 			}
 		}
 	}
-
+	
 	@Override
 	public boolean addNode(V node)
 	{
