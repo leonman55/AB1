@@ -13,6 +13,7 @@ import org.sopra.api.exercises.exercise3.FlowEdge;
 import org.sopra.api.exercises.exercise3.FlowGraph;
 import org.sopra.api.exercises.exercise3.ResidualEdge;
 import org.sopra.api.exercises.exercise3.ResidualGraph;
+import solutions.exercise3.*;
 
 public class ResidualGraphImpl<V> implements ResidualGraph<V>, ExerciseSubmission
 {
@@ -22,6 +23,7 @@ public class ResidualGraphImpl<V> implements ResidualGraph<V>, ExerciseSubmissio
 	{
 		this.outerMap = new HashMap<V, List<ResidualEdge<V>>>();
 		List<ResidualEdge<V>> ignored = new ArrayList<ResidualEdge<V>>();
+		List<FlowEdge<V>> visited = new ArrayList<FlowEdge<V>>();
 		for(V node : flowGraph.getNodes())
 		{
 			this.outerMap.put(node, new ArrayList<ResidualEdge<V>>());
@@ -30,38 +32,35 @@ public class ResidualGraphImpl<V> implements ResidualGraph<V>, ExerciseSubmissio
 		{
 			for(FlowEdge<V> edge : flowGraph.edgesFrom(node))
 			{
-				ResidualEdge<V> newEdge;
-				ResidualEdge<V> counterEdge;
-				newEdge = new ResidualEdgeImpl<V>(edge.getStart(), edge.getEnd(), edge.getCapacity() - edge.getFlow());
-				if (newEdge != null && ignored.contains(newEdge))
+				ResidualEdge<V> forward;
+				ResidualEdge<V> reverse;
+				if(outerMap.get(edge.getStart()).contains((ResidualEdge<V>) new ResidualEdgeImpl<V>(edge.getStart(), edge.getEnd(), edge.getCapacity() - edge.getFlow())) == false)
 				{
 					// Search for reverse edge in flow graph
+					FlowEdge<V> rev_edge = flowGraph.getEdge(edge.getEnd(), node);
 					// Case 1: Edge in both directions in flow graph
-					if (flowGraph.getEdge(edge.getEnd(), edge.getStart()) == null)
+					if (rev_edge != null)
 					{
-						counterEdge = new ResidualEdgeImpl<V>(edge.getEnd(), edge.getStart(), edge.getFlow());
+						visited.add(rev_edge);
+						forward = (ResidualEdge<V>) new ResidualEdgeImpl<V>(edge.getStart(), edge.getEnd(), edge.getCapacity() - edge.getFlow());
+						reverse = (ResidualEdge<V>) new ResidualEdgeImpl<V>(rev_edge.getStart(), rev_edge.getEnd(), rev_edge.getCapacity() - rev_edge.getFlow());
+						ignored.add(reverse);
 					}
 					else
 					{
-						// Add edge to visited list, so residual edges are not
-						// created twice
-						FlowEdge<V> reverseEdge = flowGraph.getEdge(edge.getEnd(), edge.getStart());
-						// Case 2: Undirected edge in flow graph
-						counterEdge = new ResidualEdgeImpl<V>(edge.getEnd(), edge.getStart(), reverseEdge.getCapacity() - reverseEdge.getFlow());
-						ignored.add(counterEdge);
+					forward = new ResidualEdgeImpl<V>(edge.getStart(), edge.getEnd(), edge.getCapacity() - edge.getFlow());
+					reverse = new ResidualEdgeImpl<V>(edge.getEnd(), edge.getStart(), edge.getFlow());
 					}
-					ignored.add(newEdge);
-					// assign reverse attributes for both edges
-					newEdge.setReverse(counterEdge);
-					counterEdge.setReverse(newEdge);
-
-					// add edges to residual graph
-					outerMap.get(edge.getStart()).add(newEdge);
-					outerMap.get(edge.getEnd()).add(counterEdge);
+					ignored.add(forward);
+					visited.add(edge);
+					forward.setReverse(reverse);
+					reverse.setReverse(forward);
+					outerMap.get(edge.getStart()).add(forward);
+					outerMap.get(edge.getEnd()).add(reverse);
 				}
 			}
 		}
-				
+	}		
 				
 //				if(ignored.contains(edge) == false);
 //				{
@@ -91,7 +90,7 @@ public class ResidualGraphImpl<V> implements ResidualGraph<V>, ExerciseSubmissio
 //				}
 //			}
 //		}
-	}
+	
 	
 //	public ResidualGraphImpl(FlowGraph<V> flowGraph) {
 //
