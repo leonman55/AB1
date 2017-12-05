@@ -14,7 +14,9 @@ import org.sopra.api.exercises.exercise3.ResidualEdge;
 import org.sopra.api.exercises.exercise3.ResidualGraph;
 
 /**
- * This class implements a solution of AB 3.5.
+ * Diese generische Klasse stellt einen residualen Graphen da.
+ * 
+ * @author Isabelle, Leon, Pascal, Stefan
  */
 public final class ResidualGraphImpl<V> implements ExerciseSubmission, ResidualGraph<V>
 {
@@ -27,7 +29,7 @@ public final class ResidualGraphImpl<V> implements ExerciseSubmission, ResidualG
 		List<FlowEdge<V>> ignore = new ArrayList<FlowEdge<V>>();
 		List<V> startNodes = new ArrayList<V>(flowGraph.getNodes());
 
-		// Alle Knoten mï¿½ssen im Residualgraphen vorhanden sein
+		// Alle Knoten müssen im Residualgraphen vorhanden sein
 		for (V nodes : startNodes)
 		{
 			outerMap.put(nodes, new ArrayList<ResidualEdge<V>>());
@@ -50,11 +52,12 @@ public final class ResidualGraphImpl<V> implements ExerciseSubmission, ResidualG
 							edge.getCapacity() - edge.getFlow());
 					FlowEdge<V> tempEdge = flowGraph.getEdge(edge.getEnd(), edge.getStart());
 					FlowEdge<V> tempReverseEdge = flowGraph.getEdge(edge.getEnd(), edge.getStart());
-					
-					// Neue Kante zur ignore Liste hinzufï¿½gen
+
+					// Neue Kante zur ignore Liste hinzufügen
 					ignore.add(edge);
 
-					// Wenn es im FlowGraphen keine Gegenkante gibt: Dann eine residuale Gegenkante aus
+					// Wenn es im FlowGraphen keine Gegenkante gibt: Dann eine residuale Gegenkante
+					// aus
 					// den Daten der aktuellen Kante erstellen.
 					//
 					// Ansonsten mit den Daten der Gegenkante aus dem FlowGraphen eine Gegenkante
@@ -84,12 +87,27 @@ public final class ResidualGraphImpl<V> implements ExerciseSubmission, ResidualG
 	}
 
 	@Override
+	/**
+	 * Gibt Team Identifier zurück
+	 * 
+	 * @return Teamidentifier
+	 */
 	public String getTeamIdentifier()
 	{
 		return "G05T04";
 	}
 
 	@Override
+	/**
+	 * 
+	 * Gibt alle Kanten die von einem Knoten ausgehen zurück
+	 * 
+	 * @param node
+	 *            Zu prüfender Knoten
+	 * @return Alle Kanten die den Knoten verlassen
+	 * @exception NoSuchElementException
+	 *                wenn Knoten nicht existiert
+	 */
 	public List<ResidualEdge<V>> edgesFrom(V node)
 	{
 		if (this.outerMap.get(node) == null)
@@ -103,6 +121,17 @@ public final class ResidualGraphImpl<V> implements ExerciseSubmission, ResidualG
 	}
 
 	@Override
+	/**
+	 * Gibt eine Kante die vom Startknoten zum Endknoten läuft zurück
+	 * 
+	 * @param start
+	 *            Startknoten
+	 * @param end
+	 *            Endknoten
+	 * @return Kante
+	 * @exception IllegalArgumentException
+	 *                wenn Start- Und Oder EndKnoten Null sind
+	 */
 	public ResidualEdge<V> getEdge(V start, V end)
 	{
 		if (start == null || end == null)
@@ -130,6 +159,11 @@ public final class ResidualGraphImpl<V> implements ExerciseSubmission, ResidualG
 	}
 
 	@Override
+	/**
+	 * Gibt Liste aller Residualkanten des Graphen zurück
+	 * 
+	 * @return Liste der Residualkanten
+	 */
 	public List<ResidualEdge<V>> getEdges()
 	{
 		ArrayList<ResidualEdge<V>> back = new ArrayList<ResidualEdge<V>>();
@@ -151,6 +185,11 @@ public final class ResidualGraphImpl<V> implements ExerciseSubmission, ResidualG
 	}
 
 	@Override
+	/**
+	 * Gibt alle Knoten aus
+	 * 
+	 * @return Alle Knoten des Graphen
+	 */
 	public Set<V> getNodes()
 	{
 		return this.outerMap.keySet();
