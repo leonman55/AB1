@@ -17,13 +17,21 @@ import solutions.exercise3.ResidualGraphImpl;
 
 public class FordFulkersonTest extends AbstractFordFulkersonTest implements ExerciseSubmission
 {
-
+	/**
+	 * Gibt den Teamidentifier zur¸ck
+	 * 
+	 * @return TeamIdentifier als String
+	 */
 	@Override
 	public String getTeamIdentifier()
 	{
 		return "G05T04";
 	}
 
+	/**
+	 * Tested ob die Implementierung der Methode augmentPast richtig ist. Genutzt
+	 * wird dazu flowGraph 1 mit dem Pfad von s nach t ¸ber b, a und d.
+	 */
 	@Test
 	public void test_augmentPath1()
 	{
@@ -53,6 +61,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		assertEquals(flowDT, 3);
 	}
 
+	/**
+	 * Tested ob die Implementierung der Methode augmentPath richtig ist. Genutzt
+	 * wird dazu flowGraph 2 mit dem Pfad von s nach t ¸ber a, c, b und e.
+	 */
 	@Test
 	public void test_augmentPath2()
 	{
@@ -86,6 +98,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		assertEquals(flowET, 5);
 	}
 
+	/**
+	 * Es wird getested ob die Methode augmentPath richtig mit dem fehlerhaften
+	 * Parameter null umgeht.
+	 */
 	@Test
 	public void test_augmentPath_ParameterNull()
 	{
@@ -100,12 +116,20 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		}
 	}
 
+	/**
+	 * Es wird getested ob die Methode findMaxFlow richtig damit umgeht null
+	 * anstelle des Graphen erh‰lt.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void test_findMaxFlow_ParameterGraphIsNull()
 	{
 		sut.findMaxFlow(null, "s", "t");
 	}
 
+	/**
+	 * Es wird getested ob die Methode findeMaxFlow richtig mit null anstelle einem
+	 * ordnungsgem‰ﬂem Parameter Start umgeht.
+	 */
 	@Test
 	public void test_findMaxFlow_ParameterStartIsNull()
 	{
@@ -119,6 +143,11 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 
 		}
 	}
+
+	/**
+	 * Es wird getested ob die Methode findeMaxFlow richtig mit null anstelle einem
+	 * ordnungsgem‰ﬂem Parameter Target umgeht.
+	 */
 
 	@Test
 	public void test_findMaxFlow_ParameterTargetIsNull()
@@ -134,6 +163,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		}
 	}
 
+	/**
+	 * Es wird getested ob die Methode findMaxFlow richtig mit einem Endknoten
+	 * umgeht, der auﬂerhalb des Graphen liegt.
+	 */
 	@Test
 	public void test_findMaxFlow_ParameterTargetNotInGraph()
 	{
@@ -148,6 +181,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		}
 	}
 
+	/**
+	 * Es wird getested ob im Testgraph flowGraphA durch die Methode findMaxFlow der
+	 * richtige maximale Fluss von s nach t bestimmt wird.
+	 */
 	@Test
 	public void test_findMaxFlow_flowGraphA()
 	{
@@ -171,6 +208,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		assertEquals(flowT, 17);
 	}
 
+	/**
+	 * Es wird getested ob im Testgraph flowGraphB durch die Methode findMaxFlow der
+	 * richtige maximale Fluss von s nach t bestimmt wird.
+	 */
 	@Test
 	public void test_findMaxFlow_flowGraphB()
 	{
@@ -194,6 +235,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		assertEquals(flowT, 24);
 	}
 
+	/**
+	 * Es wird getested ob im Testgraph flowGraphC durch die Methode findMaxFlow der
+	 * richtige maximale Fluss von s nach t bestimmt wird.
+	 */
 	@Test
 	public void test_findMaxFlow_flowGraphC()
 	{
@@ -217,6 +262,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		assertEquals(flowT, 10);
 	}
 
+	/**
+	 * Es wird getested ob im flowGraph1 die Methode flowPath den richtigen
+	 * k¸rzesten Pfad findet.
+	 */
 	@Test
 	public void test_findPath1()
 	{
@@ -232,6 +281,11 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 					|| (residualEdge.getStart() == "d" && residualEdge.getEnd() == "t"));
 		}
 	}
+
+	/**
+	 * Es wird getested ob im flowGraph2 die Methode flowPath den richtigen
+	 * k¸rzesten Pfad findet.
+	 */
 
 	@Test
 	public void test_findPath2()
@@ -249,6 +303,11 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		}
 	}
 
+	/**
+	 * Es wird getested ob die Methode findPath im Testgraph flowGraph3 richtig
+	 * damit umgeht, dass es keinen Pfad mit einer Kapazit‰t >0 von s nach t gibt.
+	 */
+
 	@Test
 	public void test_findPath_IsNull()
 	{
@@ -256,6 +315,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		assertNull(sut.findPath("s", "t", graph));
 	}
 
+	/**
+	 * Es wird getested ob die Methode findPath richtig mit dem Parameter null
+	 * anstelle eines Graphen umgeht.
+	 */
 	@Test
 	public void test_findPath_ParameterGraphIsNull()
 	{
@@ -270,6 +333,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		}
 	}
 
+	/**
+	 * Es wird getested ob die Methode findPath richtig mit dem Parameter null
+	 * anstelle eines ordnungsgem‰ﬂen Starts umgeht.
+	 */
 	@Test
 	public void test_findPath_ParameterStartIsNull()
 	{
@@ -285,6 +352,10 @@ public class FordFulkersonTest extends AbstractFordFulkersonTest implements Exer
 		}
 	}
 
+	/**
+	 * Es wird getested ob die Methode findPath richtig mit dem Parameter null
+	 * anstelle eines ordnungsgem‰ﬂen Targets umgeht.
+	 */
 	@Test
 	public void test_findPath_ParameterTargetIsNull()
 	{
