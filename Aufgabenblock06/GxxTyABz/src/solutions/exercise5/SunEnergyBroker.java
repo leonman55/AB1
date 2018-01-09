@@ -33,8 +33,7 @@ public class SunEnergyBroker extends AbstractSunEnergyBroker implements Exercise
 	public void executionPhase(Scenario scenario, int round) {
 		sunIntensity = scenario.getStatistics().getSunIntensityPerDay();
 
-		List<IndustrialPark> parks = scenario.getGraph().getNodes().stream().filter(n -> n instanceof IndustrialPark)
-				.map(n -> (IndustrialPark) n).collect(Collectors.toList());
+		List<IndustrialPark> parks = scenario.getGraph().getNodes().stream().filter(n -> n instanceof IndustrialPark).map(n -> (IndustrialPark) n).collect(Collectors.toList());
 
 		if (round == 0) {
 			preProcess(scenario);
@@ -82,8 +81,7 @@ public class SunEnergyBroker extends AbstractSunEnergyBroker implements Exercise
 	 * @param scenario
 	 */
 	private void preProcess(Scenario scenario) {
-		List<SolarPowerPlant> plants = scenario.getGraph().getNodes().stream().filter(n -> n instanceof SolarPowerPlant)
-				.map(n -> (SolarPowerPlant) n).collect(Collectors.toList());
+		List<SolarPowerPlant> plants = scenario.getGraph().getNodes().stream().filter(n -> n instanceof SolarPowerPlant).map(n -> (SolarPowerPlant) n).collect(Collectors.toList());
 
 		for (int hour = 0; hour < 24; hour++) {
 			Map<Producer, Integer> producerCapacities = new HashMap<>();
@@ -106,10 +104,8 @@ public class SunEnergyBroker extends AbstractSunEnergyBroker implements Exercise
 		}
 	}
 
-	private Map<Consumer, Integer> simulateWith(Graph<EnergyNode, PowerLine> graph,
-			Map<Producer, Integer> producerCapacities) {
-		AbstractEnergyNetworkAnalyzer analyzer = new EnergyNetworkAnalyzerImpl(graph, Optional.of(producerCapacities),
-				Optional.empty());
+	private Map<Consumer, Integer> simulateWith(Graph<EnergyNode, PowerLine> graph,Map<Producer, Integer> producerCapacities) {
+		AbstractEnergyNetworkAnalyzer analyzer = new EnergyNetworkAnalyzerImpl(graph, Optional.of(producerCapacities),Optional.empty());
 		analyzer.calculateMaxFlow();
 		return analyzer.getConsumerLevels();
 	}
