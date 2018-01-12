@@ -1,12 +1,9 @@
-/**
- * 
- */
 package solutions.exercise5;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.sopra.api.Scenario;
+import org.sopra.api.command.CannotAssignCommandException;
 import org.sopra.api.exercises.ExerciseSubmission;
 import org.sopra.api.exercises.exercise5.AbstractSunEnergyBroker;
 import org.sopra.api.model.EnergyNode;
@@ -15,178 +12,102 @@ import org.sopra.api.model.producer.SolarPowerPlant;
 
 /**
  * @author Isabelle, Leon, Pascal, Stefan
- *
  */
-public class SunEnergyBroker extends AbstractSunEnergyBroker implements ExerciseSubmission {
 
-	/**
-	 * 
-	 */
-	public SunEnergyBroker() {
-		// TODO Auto-generated constructor stub
-		super();
-	}
-
-	/* (non-Javadoc)
-	 * @see org.sopra.api.Game#executionPhase(org.sopra.api.Scenario, int)
-	 */
+public class SunEnergyBroker extends AbstractSunEnergyBroker implements ExerciseSubmission
+{
 	@Override
-	public void executionPhase(Scenario scenario, int round) {
-		System.out.println(round);
-		// TODO Auto-generated method stub
+	public void executionPhase(Scenario scenario, int round)
+	{
 		
-		List<SolarPowerPlant> plant = new ArrayList<>();
-		List<SolarPowerPlant> plants = new ArrayList<>();
-		List<IndustrialPark> consumer = new ArrayList<>();
-		List<IndustrialPark> consumers = new ArrayList<>();
-		List<EnergyNode> nodes = new ArrayList<>(scenario.getGraph().getNodes());
-		//double sunIntensity = scenario.getStatistics().getSunIntensity():
-		
-		for (EnergyNode energyNode : nodes)
+		// Alle Parks und Plants finden
+		ArrayList<SolarPowerPlant> plants = new ArrayList<>();
+		ArrayList<IndustrialPark> parks = new ArrayList<>();
+
+		for (EnergyNode node : scenario.getGraph().getNodes())
 		{
-			if(energyNode instanceof SolarPowerPlant)
+			if (node instanceof SolarPowerPlant)
 			{
-				plant.add((SolarPowerPlant)energyNode);
+				plants.add((SolarPowerPlant) node);
 			}
-			if(energyNode instanceof SolarPowerPlant)
+			else if (node instanceof IndustrialPark)
 			{
-				plants.add((SolarPowerPlant)energyNode);
+				parks.add((IndustrialPark) node);
 			}
-			if(energyNode instanceof IndustrialPark)
+		}
+
+		// Verfuegbare und benoetigte Energie feststellen
+		double[] intensitaet = scenario.getStatistics().getSunIntensityPerDay();
+		double[] energieVerfuegbar = new double[24];
+
+		// Energiegewinn ueber einen Tag simulieren
+		for (int i = 0; i < 24; i++)
+		{
+			for (SolarPowerPlant plant : plants)
 			{
-				consumer.add((IndustrialPark)energyNode);
-			}
-			if(energyNode instanceof IndustrialPark)
-			{
-				consumers.add((IndustrialPark)energyNode);
+				energieVerfuegbar[i] = energieVerfuegbar[i] + plant.getMaximumEnergyLevel() * intensitaet[i];
 			}
 		}
 		
+		// Verbrauch fuer verschiedene Prozentsaetze simulieren
+		double[] energieVerbrauch = new double[101];
+		
+		for (int i = 0; i <= 100; i++)
+		{
+			for (IndustrialPark park : parks)
+			{
+				energieVerbrauch[i] = energieVerbrauch[i] + park.getMaximumEnergyLevel()*((double)i/100.00);
+			}
+		}
+
+		// Industrieanlagen entsprechend regeln
 		if(round == 0)
 		{
-			for(IndustrialPark consumer_nr : consumer)
+			for (IndustrialPark park : parks)
 			{
-				scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, 30);
+				try
+				{
+					scenario.getCommandFactory().createAdjustConsumerCommand(park, -park.getMaximumEnergyLevel()).assign();
+				} catch (CannotAssignCommandException e)
+				{
+					
+				}
 			}
 		}
 		
-		int hour = round % 24;
-		if(consumers.size()+plants.size()==consumer.size()+plant.size())
+		int zeit = round%24;
+		if (energieVerfuegbar[zeit] != energieVerfuegbar[(zeit+2)%24])
 		{
-			for(SolarPowerPlant plant_nr : plant)
+			int prozent = 0;
+			for(prozent=0; prozent <= 100; prozent++)
 			{
-				if((consumers.size()==consumer.size()) && (plants.size()==plant.size()))
+				if(energieVerbrauch[prozent] > energieVerfuegbar[(zeit+2)%24])
 				{
-					
-					for(IndustrialPark consumer_nr : consumer)
+					prozent--;
+					break;
+				}
+			}
+			int aenderung = 0;
+			for (IndustrialPark park : parks)
+			{
+				if (!park.isAdjusting())
+				{
+					aenderung = (int) ((energieVerbrauch[prozent]-(park.getEnergyLevel()*parks.size()))/parks.size());
+					try
 					{
-						int sum = plant_nr.getProvidedPower()-consumer_nr.getRequiredPower();
-						
-						if(plant_nr.getProvidedPower() > consumer_nr.getRequiredPower() && hour < 12)
-						{
-								switch (hour)
-								{
-									case 1: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, +-sum);
-									break;
-								}
-								
-						}
-						if(plant_nr.getProvidedPower() < consumer_nr.getRequiredPower() && hour < 12)
-						{
-								switch (hour)
-								{
-									case 1: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, +-sum);
-									break;
-								}
-								
-						}
-						if(plant_nr.getProvidedPower() == consumer_nr.getRequiredPower() && hour < 12)
-						{
-								switch (hour)
-								{
-									case 1: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, +-sum);
-									break;
-								}
-								
-						}
-						
+						scenario.getCommandFactory().createAdjustConsumerCommand(park, aenderung).assign();
+					} catch (Exception e)
+					{
 						
 					}
 				}
 			}
 		}
-			
-			
-			
-			
-			
-			
-//			if((consumers.size()==consumer.size())==(plants.size()==plant.size()))
-//			{
-//				for(IndustrialPark consumer_nr : consumer)
-//				{
-//					switch (hour)
-//					{
-//						case 1: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, 30);
-//						break;
-//						case 4: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, 30);
-//						break;
-//						case 7: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, 30);
-//						break;
-//						case 12: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, -30);
-//						break;
-//						case 15: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, -30);
-//						break;
-//						case 19: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, -30);
-//						break;
-//						
-//					}
-//				}
-//			}
-//			
-//			if((consumers.size()==consumer.size()) && (plants.size()==plant.size()) && (consumer.size() > plant.size()))
-//			{
-//				for(IndustrialPark consumer_nr : consumer)
-//				{
-//					switch (hour)
-//					{
-//						case 1: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, 30);
-//						break;
-//						case 4: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, 30);
-//						break;
-//						case 7: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, 30);
-//						break;
-//						case 12: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, -30);
-//						break;
-//						case 15: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, -30);
-//						break;
-//						case 19: scenario.getCommandFactory().createAdjustConsumerCommand(consumer_nr, -30);
-//						break;
-//						
-//					}
-//				}
-//			}
-//			
-			
-
-		//TransformerStation
-		//System.out.println(scenario.getStatistics().getConsumerLoad()); 
-		
-		//superquelle und senke erstellen.... ->superSink, superSource
-		
-		//verschiedene Fälle (switch case..) für verschiedene Tageszeiten/Runden 
-		//-> Konsumenten auf Prozentualen Anteil regeln sodass der angeforderte Anteil lieferbar ist 
-		
-		//Runde 0: Bauphase Sprung zu Runde 1 werden alle Regelungen übernommen. anforderungen auf maximalem Bedarf
-		//wenn das Solarkraftwerk gerade nichts liefert muss der Industrie Park runtergeregelt werden
 	}
 
-	/* (non-Javadoc)
-	 * @see org.sopra.api.exercises.ExerciseSubmission#getTeamIdentifier()
-	 */
 	@Override
-	public String getTeamIdentifier() {
-		// TODO Auto-generated method stub
+	public String getTeamIdentifier()
+	{
 		return "G05T04";
 	}
 
