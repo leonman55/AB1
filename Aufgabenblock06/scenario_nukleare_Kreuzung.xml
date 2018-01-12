@@ -1,0 +1,223 @@
+<scenario>
+<playfield>
+	<elements>
+		<element type="beach" xpos="0" ypos="0" />
+        <element type="beach" xpos="1" ypos="0" />
+        <element type="beach" xpos="2" ypos="0" />
+        <element type="beach" xpos="3" ypos="0" />
+        <element type="beach" xpos="4" ypos="0" />
+        <element type="beach" xpos="5" ypos="0" />
+        <element type="beach" xpos="6" ypos="0" />
+        <element type="beach" xpos="7" ypos="0" />
+        <element type="beach" xpos="8" ypos="0" />
+        <element type="beach" xpos="9" ypos="0" />
+        
+        <element type="beach" xpos="0" ypos="1" />
+        <element type="mountain" xpos="1" ypos="1" />
+        <element type="mountain" xpos="2" ypos="1" />
+        <element type="river" xpos="3" ypos="1" />
+        <element type="grassland" xpos="4" ypos="1" />
+        <element type="grassland" xpos="5" ypos="1" />
+        <element type="grassland" xpos="6" ypos="1" />
+        <element type="grassland" xpos="7" ypos="1" />
+        <element type="grassland" xpos="8" ypos="1" />
+        <element type="beach" xpos="9" ypos="1" />
+        
+        <element type="beach" xpos="0" ypos="2" />
+        <element type="mountain" xpos="1" ypos="2" />
+        <element type="mountain" xpos="2" ypos="2" />
+        <element type="river" xpos="3" ypos="2" />
+        <element type="river" xpos="4" ypos="2" />
+        <element type="grassland" xpos="5" ypos="2" />
+        <element type="grassland" xpos="6" ypos="2" />
+        <element type="grassland" xpos="7" ypos="2" />
+        <element type="grassland" xpos="8" ypos="2" />
+        <element type="beach" xpos="9" ypos="2" />
+        
+        <element type="beach" xpos="0" ypos="3" />
+        <element type="mountain" xpos="1" ypos="3" />
+        <element type="mountain" xpos="2" ypos="3" />
+        <element type="grassland" xpos="3" ypos="3" />
+        <element type="river" xpos="4" ypos="3" />
+        <element type="grassland" xpos="5" ypos="3" />
+        <element type="grassland" xpos="6" ypos="3" />
+        <element type="grassland" xpos="7" ypos="3" />
+        <element type="grassland" xpos="8" ypos="3" />
+        <element type="beach" xpos="9" ypos="3" />
+
+        <element type="beach" xpos="0" ypos="4" />
+        <element type="grassland" xpos="1" ypos="4" />
+        <element type="grassland" xpos="2" ypos="4" />
+        <element type="grassland" xpos="3" ypos="4" />
+        <element type="river" xpos="4" ypos="4" />
+        <element type="grassland" xpos="5" ypos="4" />
+        <element type="grassland" xpos="6" ypos="4" />
+        <element type="grassland" xpos="7" ypos="4" />
+        <element type="grassland" xpos="8" ypos="4" />
+        <element type="beach" xpos="9" ypos="4" />
+        
+        <element type="beach" xpos="0" ypos="5" />
+        <element type="grassland" xpos="1" ypos="5" />
+        <element type="grassland" xpos="2" ypos="5" />
+        <element type="grassland" xpos="3" ypos="5" />
+        <element type="river" xpos="4" ypos="5" />
+        <element type="grassland" xpos="5" ypos="5" />
+        <element type="mountain" xpos="6" ypos="5" />
+        <element type="mountain" xpos="7" ypos="5" />
+        <element type="grassland" xpos="8" ypos="5" />
+        <element type="beach" xpos="9" ypos="5" />
+        
+        <element type="beach" xpos="0" ypos="6" />
+        <element type="grassland" xpos="1" ypos="6" />
+        <element type="grassland" xpos="2" ypos="6" />
+        <element type="grassland" xpos="3" ypos="6" />
+        <element type="river" xpos="4" ypos="6" />
+        <element type="grassland" xpos="5" ypos="6" />
+        <element type="mountain" xpos="6" ypos="6" />
+        <element type="mountain" xpos="7" ypos="6" />
+        <element type="grassland" xpos="8" ypos="6" />
+        <element type="beach" xpos="9" ypos="6" />
+        
+        <element type="beach" xpos="0" ypos="7" />
+        <element type="grassland" xpos="1" ypos="7" />
+        <element type="grassland" xpos="2" ypos="7" />
+        <element type="grassland" xpos="3" ypos="7" />
+        <element type="river" xpos="4" ypos="7" />
+        <element type="grassland" xpos="5" ypos="7" />
+        <element type="mountain" xpos="6" ypos="7" />
+        <element type="mountain" xpos="7" ypos="7" />
+        <element type="grassland" xpos="8" ypos="7" />
+        <element type="beach" xpos="9" ypos="7" />
+        
+        <element type="beach" xpos="0" ypos="8" />
+        <element type="grassland" xpos="1" ypos="8" />
+        <element type="grassland" xpos="2" ypos="8" />
+        <element type="grassland" xpos="3" ypos="8" />
+        <element type="river" xpos="4" ypos="8" />
+        <element type="grassland" xpos="5" ypos="8" />
+        <element type="grassland" xpos="6" ypos="8" />
+        <element type="grassland" xpos="7" ypos="8" />
+        <element type="grassland" xpos="8" ypos="8" />
+        <element type="beach" xpos="9" ypos="8" />
+
+<!-- last -->
+        <element type="beach" xpos="0" ypos="9" />
+        <element type="beach" xpos="1" ypos="9" />
+        <element type="beach" xpos="2" ypos="9" />
+        <element type="beach" xpos="3" ypos="9" />
+        <element type="beach" xpos="4" ypos="9" />
+        <element type="beach" xpos="5" ypos="9" />
+        <element type="beach" xpos="6" ypos="9" />
+        <element type="beach" xpos="7" ypos="9" />
+        <element type="beach" xpos="8" ypos="9" />
+        <element type="beach" xpos="9" ypos="9" />
+			</elements>
+</playfield>
+
+<graph>
+	<nodes>
+        
+        <node id="0" type="transformerstation" name="cFPP1" xpos="0" ypos="0" />
+        <node id="1" type="transformerstation" name="gFPP1" xpos="0" ypos="1" />
+        <node id="2" type="transformerstation" name="gFPP2" xpos="0" ypos="2" />
+        <node id="3" type="transformerstation" name="hPP1" xpos="0" ypos="3" />
+        <node id="4" type="transformerstation" name="nPP1" xpos="0" ypos="4" />
+        <node id="5" type="transformerstation" name="sPP1" xpos="0" ypos="5" />
+        <node id="6" type="transformerstation" name="sPP2" xpos="0" ypos="6" />
+        <node id="7" type="transformerstation" name="wPP1" xpos="0" ypos="7" />
+        <node id="8" type="transformerstation" name="wPP2" xpos="0" ypos="8" />
+        <node id="9" type="transformerstation" name="wPP3" xpos="0" ypos="9" />
+        <node id="10" type="nuclearPowerPlant" name="Biblis" xpos="5" ypos="5" />
+ 
+        <node id="11" type="city" name="Offenbach" xpos="9" ypos="0" />
+        <node id="12" type="city" name="Mainz" xpos="9" ypos="2" />
+        <node id="13" type="city" name="Wiesbaden" xpos="9" ypos="4" />
+        <node id="14" type="industrialPark" name="ApelAutomotive" xpos="9" ypos="5" />
+        <node id="15" type="industrialPark" name="WASF" xpos="9" ypos="6" />
+        <node id="16" type="industrialPark" name="Buyer Medical Care" xpos="9" ypos="7" />
+        <node id="17" type="commercialPark" name="Hedge Services" xpos="9" ypos="9" />
+       
+
+	</nodes>
+	<edges>
+        <edge type="lowvoltage">
+            <first reference="0"/>
+            <second reference="10"/>
+        </edge>
+
+        <edge type="lowvoltage">
+            <first reference="1"/>
+            <second reference="10"/>
+        </edge>
+
+        <edge type="lowvoltage">
+            <first reference="2"/>
+            <second reference="10"/>
+        </edge>
+
+        <edge type="lowvoltage">
+            <first reference="3"/>
+            <second reference="10"/>
+        </edge>
+
+        <edge type="lowvoltage">
+            <first reference="4"/>
+            <second reference="10"/>
+        </edge>
+
+        <edge type="lowvoltage">
+            <first reference="5"/>
+            <second reference="10"/>
+        </edge>
+
+        <edge type="lowvoltage">
+            <first reference="6"/>
+            <second reference="10"/>
+        </edge>
+        <edge type="lowvoltage">
+            <first reference="7"/>
+            <second reference="10"/>
+        </edge>
+        <edge type="lowvoltage">
+            <first reference="8"/>
+            <second reference="10"/>
+        </edge>
+        <edge type="lowvoltage">
+            <first reference="9"/>
+            <second reference="10"/>
+        </edge>
+
+        <edge type="lowvoltage">
+            <first reference="10"/>
+            <second reference="11"/>
+        </edge>
+        <edge type="lowvoltage">
+            <first reference="10"/>
+            <second reference="12"/>
+        </edge>
+        <edge type="lowvoltage">
+            <first reference="10"/>
+            <second reference="13"/>
+        </edge>
+        <edge type="lowvoltage">
+            <first reference="10"/>
+            <second reference="14"/>
+        </edge>
+        <edge type="lowvoltage">
+            <first reference="10"/>
+            <second reference="15"/>
+        </edge>
+        <edge type="lowvoltage">
+            <first reference="10"/>
+            <second reference="16"/>
+        </edge>
+        <edge type="lowvoltage">
+            <first reference="10"/>
+            <second reference="17"/>
+        </edge>
+
+
+	</edges>
+</graph>
+
+</scenario>

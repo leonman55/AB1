@@ -1,0 +1,131 @@
+<scenario>
+<playfield>
+	<elements>
+	<element type="beach" xpos="0" ypos="0" />
+	<element type="beach" xpos="1" ypos="0" />
+	<element type="beach" xpos="2" ypos="0" />
+	<element type="beach" xpos="3" ypos="0" />
+	<element type="beach" xpos="4" ypos="0" />
+	<element type="beach" xpos="5" ypos="0" />
+	<element type="beach" xpos="6" ypos="0" />
+	<element type="beach" xpos="7" ypos="0" />
+	<element type="beach" xpos="0" ypos="1" />
+	<element type="grassland" xpos="1" ypos="1" />
+	<element type="river" xpos="2" ypos="1" />
+	<element type="grassland" xpos="3" ypos="1" />
+	<element type="grassland" xpos="4" ypos="1" />
+	<element type="grassland" xpos="5" ypos="1" />
+	<element type="grassland" xpos="6" ypos="1" />
+	<element type="beach" xpos="7" ypos="1" />
+	<element type="beach" xpos="0" ypos="2" />
+	<element type="mountain" xpos="1" ypos="2" />
+	<element type="mountain" xpos="2" ypos="2" />
+	<element type="river" xpos="3" ypos="2" />
+	<element type="river" xpos="4" ypos="2" />
+	<element type="mountain" xpos="5" ypos="2" />
+	<element type="mountain" xpos="6" ypos="2" />
+	<element type="beach" xpos="7" ypos="2" />
+	<element type="beach" xpos="0" ypos="3" />
+	<element type="grassland" xpos="1" ypos="3" />
+	<element type="grassland" xpos="2" ypos="3" />
+	<element type="grassland" xpos="3" ypos="3" />
+	<element type="river" xpos="4" ypos="3" />
+	<element type="grassland" xpos="5" ypos="3" />
+	<element type="grassland" xpos="6" ypos="3" />
+	<element type="beach" xpos="7" ypos="3" />
+	<element type="beach" xpos="0" ypos="4" />
+	<element type="beach" xpos="1" ypos="4" />
+	<element type="beach" xpos="2" ypos="4" />
+	<element type="beach" xpos="3" ypos="4" />
+	<element type="beach" xpos="4" ypos="4" />
+	<element type="beach" xpos="5" ypos="4" />
+	<element type="beach" xpos="6" ypos="4" />
+	<element type="beach" xpos="7" ypos="4" />
+	</elements>
+</playfield>
+
+<graph>
+	<nodes>
+		<node id="0" type="city" name="Stadt0" xpos="3" ypos="0" />
+		<node id="2" type="gasfiredpowerplant" name="Gaskraftwerk2" xpos="0" ypos="1" />
+		<node id="3" type="biogasfiredpowerplant" name="Biogaskraftwerk3" xpos="1" ypos="1" />	
+		<node id="4" type="coalfiredpowerplant" name="Kohlekraftwerk4" xpos="2" ypos="1" />
+		<node id="5" type="commercialpark" name="Gewerbepark5" xpos="5" ypos="1" />
+		<node id="6" type="industrialpark" name="Industriepark6" xpos="6" ypos="1" />	
+		<node id="7" type="hydropowerplant" name="Wasserkraftwerk7" xpos="4" ypos="2" />
+		<node id="8" type="windpowerplant" name="Windkraftwerk8" xpos="0" ypos="3" />
+		<node id="9" type="city" name="Stadt9" xpos="3" ypos="3" />
+		<node id="10" type="nuclearpowerplant" name="Atomkraftwerk10" xpos="6" ypos="3" />
+		<node id="11" type="city" name="Stadt11" xpos="1" ypos="4" />
+		<node id="12" type="solarpowerplant" name="Solarkraftwerk12" xpos="2" ypos="4" />
+		<node id="13" type="city" name="Stadt13" xpos="4" ypos="4" />
+	</nodes>
+	<edges>
+		<edge type="lowVoltage">
+			<first reference="0"/>
+			<second reference="3"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="6"/>
+			<second reference="7"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="2"/>
+			<second reference="3"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="3"/>
+			<second reference="4"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="4"/>
+			<second reference="5"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="5"/>
+			<second reference="6"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="2"/>
+			<second reference="8"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="2"/>
+			<second reference="11"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="8"/>
+			<second reference="11"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="9"/>
+			<second reference="11"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="11"/>
+			<second reference="12"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="7"/>
+			<second reference="9"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="7"/>
+			<second reference="13"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="9"/>
+			<second reference="10"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="10"/>
+			<second reference="13"/>
+		</edge>
+		<edge type="lowVoltage">
+			<first reference="6"/>
+			<second reference="10"/>
+		</edge>
+	</edges>
+</graph>
+
+</scenario>
