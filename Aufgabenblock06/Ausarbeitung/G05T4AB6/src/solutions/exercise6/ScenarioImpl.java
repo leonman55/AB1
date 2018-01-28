@@ -28,19 +28,30 @@ import org.sopra.api.model.producer.ControllableProducer;
 import org.sopra.api.model.producer.Producer;
 import org.sopra.api.model.producer.ProducerType;
 
+/**
+ * @author Isabelle, Leon, Pascal, Stefan
+ */
 public class ScenarioImpl implements Game, ExerciseSubmission
 {
 
+	/**
+	 * returns the specific team identification
+	 * @return team identification string
+	 */
 	@Override
 	public String getTeamIdentifier()
 	{
 		return "G05T04";
 	}
 
+	/**
+	 * Once executed before the scenario is started
+	 * @param scenario the current scenario
+	 * @throws CannotExecuteCommandException is thrown if a build command can not be executed
+	 */
 	@Override
 	public void buildPhase(Scenario scenario)
 	{
-		// TODO Auto-generated method stub
 		ScenarioUtilImpl util = new ScenarioUtilImpl();
 		List<PowerLine> lowLines = util.getPowerLinesByType(scenario.getGraph(), PowerLineType.LOW_VOLTAGE);
 		List<PowerLine> mediumLines = util.getPowerLinesByType(scenario.getGraph(), PowerLineType.MEDIUM_VOLTAGE);
@@ -150,7 +161,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission
 					scenario.getCommandFactory().createUpgradeLineCommand(line, PowerLineType.HIGH_VOLTAGE).execute();
 					System.out.println("lowLine upgraded");
 				}
-				catch(Exception e)
+				catch(CannotExecuteCommandException e)
 				{
 					
 				}
@@ -166,7 +177,7 @@ public class ScenarioImpl implements Game, ExerciseSubmission
 					scenario.getCommandFactory().createUpgradeLineCommand(line, PowerLineType.HIGH_VOLTAGE).execute();
 					System.out.println("meduimLine upgraded");
 				}
-				catch(Exception e)
+				catch(CannotExecuteCommandException e)
 				{
 					
 				}
@@ -174,6 +185,12 @@ public class ScenarioImpl implements Game, ExerciseSubmission
 		}
 	}
 
+	/**
+	 * Function, which calculates if the build location matches the type of producer
+	 * @param element type of ground element
+	 * @param type type of producer
+	 * @return true if element and type do match, false otherwise
+	 */
 	private boolean buildLocationDoesMatchPlantType(ElementType element, ProducerType type)
 	{
 		if(element == null)
@@ -345,12 +362,57 @@ public class ScenarioImpl implements Game, ExerciseSubmission
 		}
 	}
 	
+	/**
+	 * called every round, should regulate the controllable producers and controllable consumers to match energy production and consumption
+	 * @param scenario the current scenario
+	 * @param round the current round
+	 * @throws CannotAssignCommandException thrown if a assign command fails
+	 */
 	@Override
 	public void executionPhase(Scenario scenario, int round)
 	{
-		// TODO Auto-generated method stub
 		ScenarioUtilImpl util = new ScenarioUtilImpl();
+		List<PowerLine> lowLines = util.getPowerLinesByType(scenario.getGraph(), PowerLineType.LOW_VOLTAGE);
+		List<PowerLine> mediumLines = util.getPowerLinesByType(scenario.getGraph(), PowerLineType.MEDIUM_VOLTAGE);
+		List<PowerLine> highLines = util.getPowerLinesByType(scenario.getGraph(), PowerLineType.HIGH_VOLTAGE);
+		List<Consumer> consumers = util.getConsumers(scenario.getGraph());
+		List<ControllableConsumer> controllableConsumers = util.getControllableConsumers(scenario.getGraph());
+		List<Producer> producers = util.getProducers(scenario.getGraph());
 		List<ControllableProducer> controllableProducers = util.getControllableProducers(scenario.getGraph());
+		HashMap<TransformerStation, PlayfieldElement> transformerStations = new HashMap<TransformerStation, PlayfieldElement>();
+		for(EnergyNode node : scenario.getGraph().getNodes())
+		{
+			if(node instanceof TransformerStation)
+			{
+//				System.out.println("TransformerStation: " + node.getName());
+				transformerStations.put((TransformerStation) node, scenario.getPlayfield().getPlayfieldElement(node.getXPos(), node.getYPos()));
+			}
+		}
+		
+		int maximumLoadConsumers = 0;
+		int maximumLoadControllableConsumers = 0;
+		int maximumLoadProducers = 0;
+		int maximumLoadControllableProducers = 0;
+		for(Consumer con : consumers)
+		{
+			System.out.println("Consumer: " + con.getName());
+			maximumLoadConsumers += con.getMaximumEnergyLevel();
+		}
+		for(ControllableConsumer con : controllableConsumers)
+		{
+			System.out.println("ControllableConsumer: " + con.getName());
+			maximumLoadControllableConsumers += con.getMaximumEnergyLevel();
+		}
+		for(Producer prod : producers)
+		{
+			System.out.println("Producer: " + prod.getName());
+			maximumLoadProducers += prod.getMaximumEnergyLevel();
+		}
+		for(ControllableProducer prod : controllableProducers)
+		{
+			System.out.println("ControllableProducer: " + prod.getName());
+			maximumLoadControllableProducers += prod.getMaximumEnergyLevel();
+		}
 		for(ControllableProducer prod : controllableProducers)
 		{
 			System.out.println("Current Energy:" + prod.getEnergyLevel() + "    Maximum Warp: " + prod.getMaximumEnergyLevel());
@@ -359,6 +421,17 @@ public class ScenarioImpl implements Game, ExerciseSubmission
 				scenario.getCommandFactory().createAdjustProducerCommand((ControllableProducer) prod, prod.getMaximumEnergyLevel() - prod.getEnergyLevel()).assign();
 			}
 			catch (CannotAssignCommandException e)
+			{
+				
+			}
+		}
+		for(ControllableConsumer con : controllableConsumers)
+		{
+			try
+			{
+				scenario.getCommandFactory().createAdjustConsumerCommand((ControllableConsumer) con, con.getMaximumEnergyLevel() - con.getEnergyLevel()).assign(); 
+			}
+			catch(CannotAssignCommandException e)
 			{
 				
 			}
